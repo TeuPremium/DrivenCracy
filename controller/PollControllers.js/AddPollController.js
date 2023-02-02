@@ -9,13 +9,13 @@ export async function addPoll(req, res){
     
 
     try {          
-        const pollid = await pollCollection.insertOne({ title, expireAt: timestamp });
+        const poll = await pollCollection.insertOne({ title, expireAt: timestamp });
 
-        const poll = await pollCollection.findOne({
-            _id: ObjectId(pollid.insertedId),
+        const pollCreated = await pollCollection.findOne({
+            _id: ObjectId(poll.insertedId),
         });
 
-        res.status(201).send(poll);
+        res.status(201).send(pollCreated);
 
         } catch (error) {
         res.status(500).send(error.message);  
