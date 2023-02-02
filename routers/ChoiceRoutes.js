@@ -1,5 +1,6 @@
 import { Router } from 'express'
 import { AddChoice } from '../controller/VoteControllers.js/ChoicePostController.js'
+import { validateChoiceExists } from '../Middlewares/ChoiceMiddlewares/ChoiceExistsInPoll.js'
 import { validateExpiredPoll } from '../Middlewares/ChoiceMiddlewares/ChoicePollExpired.js'
 import { ChoicePostSchemaValidation } from '../Middlewares/ChoiceMiddlewares/ChoicePostMiddleware.js'
 import { validatePoll } from '../Middlewares/ChoiceMiddlewares/ChoiceValidatePoll.js'
@@ -8,7 +9,7 @@ import { validatePoll } from '../Middlewares/ChoiceMiddlewares/ChoiceValidatePol
 const choiceRouter = Router()
 
 
-choiceRouter.post("/choice", ChoicePostSchemaValidation, validatePoll, validateExpiredPoll, AddChoice)
+choiceRouter.post("/choice", ChoicePostSchemaValidation, validatePoll, validateExpiredPoll, validateChoiceExists,  AddChoice)
 // choiceRouter.get("/home", listchoices)
 
 

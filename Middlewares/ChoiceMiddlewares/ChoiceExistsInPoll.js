@@ -1,16 +1,16 @@
 import { pollCollection } from "../../config/database.js";
 import { ObjectId } from "mongodb";
 
-export async function validatePoll(req, res, next) {
-    const { pollId } = req.body;
-    console.log(pollId)
+export async function validateChoiceExists(req, res, next) {
+    const { pollId, title } = req.body;
+    console.log(pollId, title)
 
     try{
         const pollExists = await pollCollection.findOne({
-        _id: ObjectId(pollId),
+        _id: ObjectId(pollId), title: title
     });
 
-    pollExists ? next() : res.sendStatus(404) 
+    pollExists ?  res.sendStatus(409) : next()  
     
     console.log(pollExists)
     } catch(error){

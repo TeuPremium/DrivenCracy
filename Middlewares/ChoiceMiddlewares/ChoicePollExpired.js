@@ -4,7 +4,6 @@ import dayjs from "dayjs";
 
 export async function validateExpiredPoll(req, res, next) {
     const { pollId } = req.body;
-    console.log(pollId)
 
     try{
         const poll = await pollCollection.findOne({
