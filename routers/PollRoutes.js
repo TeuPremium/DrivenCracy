@@ -8,7 +8,7 @@ const pollRouter = Router()
 
 
 pollRouter.post("/poll", PollPostSchemaValidation, addPoll)
-pollRouter.get("/poll", getPollMiddleware, GetPolls)
+pollRouter.get("/poll", GetPolls)
 
 
 export default pollRouter

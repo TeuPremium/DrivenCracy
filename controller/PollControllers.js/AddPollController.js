@@ -5,7 +5,7 @@ import dayjs from "dayjs";
 
 export async function addPoll(req, res){
     const { title, expireAt } = req.body
-    let timestamp = dayjs(expireAt).format("YYYY-MM-DD HH:mm") || dayjs().add(1, "M").format("YYYY-MM-DD HH:mm")
+    let timestamp = dayjs(expireAt).format("YYYY-MM-DD HH:mm") || dayjs().add(30, "d").format("YYYY-MM-DD HH:mm")
     
 
     try {          
