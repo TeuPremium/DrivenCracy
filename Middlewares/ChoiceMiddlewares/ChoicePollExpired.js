@@ -1,21 +1,21 @@
-import dayjs from "dayjs";
 import { pollCollection } from "../../config/database.js";
 import { ObjectId } from "mongodb";
+import dayjs from "dayjs";
 
-export async function validatePoll(req, res, next) {
+export async function validateExpiredPoll(req, res, next) {
     const { pollId } = req.body;
     console.log(pollId)
 
     try{
-        const pollExists = await pollCollection.findOne({
+        const poll = await pollCollection.findOne({
         _id: ObjectId(pollId),
     });
 
-    pollExists ? next() : res.sendStatus(404) 
+
+    (dayjs(poll.expireAt).isBefore(dayjs())) ? res.sendStatus(403) : next() 
     
-    console.log(pollExists)
+    console.log(poll)
     } catch(error){
         res.status(500).send(error.message)
     }
-  
 }
