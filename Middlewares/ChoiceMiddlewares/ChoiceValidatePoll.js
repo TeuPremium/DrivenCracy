@@ -3,8 +3,7 @@ import { ObjectId } from "mongodb";
 
 export async function validatePoll(req, res, next) {
     const { pollId } = req.body;
-    console.log(pollId)
-
+    
     try{
         const pollExists = await pollCollection.findOne({
         _id: ObjectId(pollId),

@@ -13,7 +13,6 @@ export async function validateExpiredPoll(req, res, next) {
 
     (dayjs(poll.expireAt).isBefore(dayjs())) ? res.sendStatus(403) : next() 
     
-    console.log(poll)
     } catch(error){
         res.status(500).send(error.message)
     }

@@ -1,14 +1,15 @@
 import { choicesCollection } from "../../config/database.js";
 
 export async function getChoice(req, res){
-    const PollId  = req.params.id
+    const pollId  = req.params.id
+    console.log(pollId)
     try {          
-        const pollcreated = await choicesCollection.findOne({ pollId: pollId });
+        const choices = await choicesCollection.find({ pollId }).toArray();
         
-        console.log(pollcreated)
+        console.log(choices)
         
 
-        res.sendStatus(201)
+        res.send(choices)
 
         } catch (error) {
         res.status(500).send(error.message);  
