@@ -11,7 +11,7 @@ export async function validatePoll(req, res, next) {
 
     pollExists ? next() : res.sendStatus(404) 
     
-    console.log(pollExists)
+
     } catch(error){
         res.status(500).send(error.message)
     }
@@ -28,7 +28,7 @@ export async function validatePollGet(req, res, next) {
 
     pollExists ? next() : res.sendStatus(404) 
     
-    console.log(pollExists)
+
     } catch(error){
         res.status(500).send(error.message)
     }
