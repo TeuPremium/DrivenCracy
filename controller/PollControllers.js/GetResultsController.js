@@ -4,7 +4,7 @@ import { pollCollection, choicesCollection, votesCollection} from "../../config/
 export async function GetResults(req, res){
     try {
         const { _id } = res.locals;
-        console.log("aaaaaaaaaaaa")
+        console.log("=========")
 
         const poll = await pollCollection.find({ _id }).toArray();
         
@@ -14,20 +14,27 @@ export async function GetResults(req, res){
         const choiceCollection = await choicesCollection
         .find({ pollId: pollId }, { projection: { title: 0, pollId: 0 } })
         .toArray();
-        let choiceIds = choiceCollection.map((n) => ObjectId(n._id).str);
+        let choiceIds = choiceCollection.map((n) => n._id);
+        // console.log(choiceCollection)
+        
+        console.log(choiceIds)
 
         const votedChoices = await choiceIds.map((n) => {
              votesCollection
         .find({ choiceId: n })
         .toArray();
-        console.log(ObjectId(ObjectId(n).str))
+        
         })
+        let vote = await votesCollection
+        .find()
+        .toArray();
+        await console.log(vote)
 
-    
-        const choiceColllection = await choicesCollection.find().toArray()
-        res.send(choiceColllection);
+        console.log(votedChoices)
 
-        console.log(choiceIds)
+        // const choiceCollection = await choicesCollection.find().toArray()
+        res.send(choiceCollection);
+
         
         // if (!votedChoices[0]) {
         //     const result = { title: "", votes: 0 };

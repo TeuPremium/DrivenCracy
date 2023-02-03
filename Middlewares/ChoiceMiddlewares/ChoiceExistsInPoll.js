@@ -10,7 +10,6 @@ export async function validateChoiceExists(req, res, next) {
             title: title
         });
         
-        console.log(choiceExists)
         if(choiceExists){res.sendStatus(409)}
         else {next()}  
         
