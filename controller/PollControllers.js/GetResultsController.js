@@ -12,7 +12,7 @@ export async function GetResults(req, res){
 
         
         const choiceCollection = await choicesCollection
-        .find({ pollId: pollId }, { projection: { title: 0, pollId: 0 } })
+        .find({ pollId }, { projection: { title: 0, pollId: 0 } })
         .toArray();
         let choiceIds = choiceCollection.map((n) => n._id);
         // console.log(choiceCollection)
@@ -25,22 +25,22 @@ export async function GetResults(req, res){
         .toArray();
         
         })
-        let vote = await votesCollection
-        .find()
-        .toArray();
-        await console.log(vote)
+        // let vote = await votesCollection
+        // .find()
+        // .toArray();
+        // await console.log(vote)
 
         console.log(votedChoices)
 
         // const choiceCollection = await choicesCollection.find().toArray()
-        res.send(choiceCollection);
-
         
-        // if (!votedChoices[0]) {
-        //     const result = { title: "", votes: 0 };
-        //     return res.send(result);
-        // }
         
+        if (!votedChoices[0]) {
+                const result = { title: "", votes: 0 };
+                return res.send(result);
+            }
+            
+            res.send(choiceCollection);
       } catch (error) {
         res.status(500).send(error.message);
       }
