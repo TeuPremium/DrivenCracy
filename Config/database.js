@@ -17,4 +17,4 @@ try {
 
 export const votesCollection = db.collection("votes");
 export const pollCollection = db.collection("polls");
-export const choicesCollection = db.collection("polls");
+export const choicesCollection = db.collection("choices");

@@ -5,13 +5,14 @@ export async function validateChoiceExists(req, res, next) {
     const { pollId, title } = req.body;
     
     try{
-        const pollExists = await pollCollection.findOne({
-             title: title
+        const choiceExists = await pollCollection.findOne({
+            pollId: pollId,
+            title: title
         });
         
-        pollExists ?  res.sendStatus(409) : next()  
+        choiceExists ?  res.sendStatus(409) : next()  
         console.log("pollExists")
-        console.log(pollExists)
+        console.log(choiceExists)
         
     } catch(error){
         res.status(500).send(error.message)
